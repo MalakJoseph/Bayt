@@ -4,14 +4,14 @@ body {
   margin: 20px;
 }
 
-.app {
+main {
   gap: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.carousel {
+.sliders {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@ body {
   position: relative;
 }
 
-.carousel-content {
+.slider-content {
   display: flex;
   align-items: center;
   width: 100%;
@@ -29,14 +29,11 @@ body {
   overflow: hidden;
 }
 
-.slide {
+.slider {
   text-align: center;
   width: 100%;
   position: absolute;
-  left: 0;
-  top: 0;
   opacity: 0;
-  transform: translateX(100%);
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
@@ -76,14 +73,14 @@ body {
 }
 
 .content {
-  max-width: 50ch; 
-  height: 3.6em; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  display: -webkit-box; 
-  -webkit-line-clamp: 3; 
-  -webkit-box-orient: vertical; 
-  line-height: 1.2em; 
+  max-width: 50ch;
+  height: 3.6em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.2em;
 }
 
 .image {

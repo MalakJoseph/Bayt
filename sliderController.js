@@ -1,12 +1,12 @@
-const initCarousel = (carouselElement) => {
-  const slides = carouselElement.querySelectorAll(".slide");
-  const dotsContainer = carouselElement.querySelector(".nav-dots");
+const populateSliderLogic = (slider) => {
+  const innerSliders = slider.querySelectorAll(".slider");
+  const dotsContainer = slider.querySelector(".nav-dots");
   let currentIndex = 0;
   let previousIndex = 0;
   let autoPlayTimerId = null;
 
   const initDots = () => {
-    slides.forEach((_, index) => {
+    innerSliders.forEach((_, index) => {
       const dot = document.createElement("span");
       dot.className = `dot ${index === 0 ? "active" : ""}`;
       dot.addEventListener("click", () => {
@@ -18,13 +18,13 @@ const initCarousel = (carouselElement) => {
   };
 
   const showSlide = (index) => {
-    slides.forEach((slide, i) => {
+    innerSliders.forEach((slide, i) => {
       slide.classList.remove("active", "prev", "next");
 
       if (i === previousIndex) {
         const isPrev =
           index > previousIndex ||
-          (index === 0 && previousIndex === slides.length - 1);
+          (index === 0 && previousIndex === innerSliders.length - 1);
         slide.classList.add(isPrev ? "prev" : "next");
       }
 
@@ -40,13 +40,14 @@ const initCarousel = (carouselElement) => {
   };
 
   const nextSlide = () => {
-    currentIndex = (currentIndex + 1) % slides.length;
+    currentIndex = (currentIndex + 1) % innerSliders.length;
     showSlide(currentIndex);
     resetAutoplay();
   };
 
   const prevSlide = () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    currentIndex =
+      (currentIndex - 1 + innerSliders.length) % innerSliders.length;
     showSlide(currentIndex);
     resetAutoplay();
   };
@@ -60,12 +61,8 @@ const initCarousel = (carouselElement) => {
     startAutoplay();
   };
 
-  carouselElement
-    .querySelector(".left-arrow")
-    .addEventListener("click", prevSlide);
-  carouselElement
-    .querySelector(".right-arrow")
-    .addEventListener("click", nextSlide);
+  slider.querySelector(".left-arrow").addEventListener("click", prevSlide);
+  slider.querySelector(".right-arrow").addEventListener("click", nextSlide);
 
   initDots();
   showSlide(currentIndex);
