@@ -18,7 +18,8 @@ const initCarousel = (carouselElement) => {
       slide.classList.remove("active", "prev", "next");
 
       if (i === previousIndex) {
-        slide.classList.add(index > previousIndex ? "prev" : "next");
+        const isPrev = index > previousIndex || (index === 0 && previousIndex === slides.length - 1);
+        slide.classList.add(isPrev ? "prev" : "next");
       }
 
       if (i === index) {
