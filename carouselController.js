@@ -3,12 +3,16 @@ const initCarousel = (carouselElement) => {
   const dotsContainer = carouselElement.querySelector(".nav-dots");
   let currentIndex = 0;
   let previousIndex = 0;
+  let autoPlayTimerId = null;
 
   const initDots = () => {
     slides.forEach((_, index) => {
       const dot = document.createElement("span");
       dot.className = `dot ${index === 0 ? "active" : ""}`;
-      dot.addEventListener("click", () => showSlide(index));
+      dot.addEventListener("click", () => {
+        showSlide(index);
+        resetAutoplay();
+      });
       dotsContainer.appendChild(dot);
     });
   };
@@ -18,7 +22,9 @@ const initCarousel = (carouselElement) => {
       slide.classList.remove("active", "prev", "next");
 
       if (i === previousIndex) {
-        const isPrev = index > previousIndex || (index === 0 && previousIndex === slides.length - 1);
+        const isPrev =
+          index > previousIndex ||
+          (index === 0 && previousIndex === slides.length - 1);
         slide.classList.add(isPrev ? "prev" : "next");
       }
 
@@ -36,15 +42,22 @@ const initCarousel = (carouselElement) => {
   const nextSlide = () => {
     currentIndex = (currentIndex + 1) % slides.length;
     showSlide(currentIndex);
+    resetAutoplay();
   };
 
   const prevSlide = () => {
     currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     showSlide(currentIndex);
+    resetAutoplay();
   };
 
   const startAutoplay = () => {
-    setInterval(() => nextSlide(), 2500);
+    autoPlayTimerId = setInterval(() => nextSlide(), 2500);
+  };
+
+  const resetAutoplay = () => {
+    clearInterval(autoPlayTimerId);
+    startAutoplay();
   };
 
   carouselElement
