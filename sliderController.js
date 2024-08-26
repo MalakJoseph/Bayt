@@ -53,7 +53,8 @@ const populateSliderLogic = (slider) => {
   };
 
   const startAutoplay = () => {
-    autoPlayTimerId = setInterval(() => nextSlide(), 2500);
+    const autoplayDuration = parseInt(slider.getAttribute('data-autoplay')) || 2500;
+    autoPlayTimerId = setInterval(() => nextSlide(), autoplayDuration);
   };
 
   const resetAutoplay = () => {
